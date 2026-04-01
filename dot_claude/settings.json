@@ -1,0 +1,58 @@
+{
+  "env": {
+    "DISABLE_AUTOUPDATER": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Read(~/src/**)",
+      "Write(~/src/**)",
+      "Edit(~/src/**)",
+      "WebSearch",
+      "WebFetch"
+    ],
+    "deny": [
+      "Bash(curl * | *)",
+      "Bash(wget *)",
+      "Bash(git push -f *)",
+      "Bash(git push --force *)",
+      "Read(~/**)",
+      "Write(~/**)",
+      "Edit(~/**)"
+    ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git worktree prune 2>/dev/null; for wt in .claude/worktrees/*/; do [ -d \"$wt\" ] && git worktree list --porcelain | grep -q \"$(cd \"$wt\" && pwd)\" || rm -rf \"$wt\"; done 2>/dev/null; true",
+            "timeout": 10,
+            "statusMessage": "Cleaning up stale worktrees..."
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "code-review@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "allowUnsandboxedCommands": false,
+    "network": {
+      "allowLocalBinding": true
+    },
+    "filesystem": {
+      "allowWrite": ["~/src"],
+      "denyWrite": ["~/"],
+      "denyRead": ["~/"],
+      "allowRead": ["~/src"]
+    }
+  }
+}

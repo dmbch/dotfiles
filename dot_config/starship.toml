@@ -1,0 +1,77 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# --- Layout ---
+# Keeps the workspace clean on the left and metadata on the right
+format = """
+$directory\
+$git_branch\
+$git_status\
+$fill\
+$nodejs\
+$python\
+$mise\
+$cmd_duration
+$character"""
+
+add_newline = true
+
+[fill]
+symbol = " "
+
+# --- Core Modules ---
+
+[directory]
+# Using 'cyan' - Ghostty renders this as a soft, muted teal
+style = "bold cyan"
+truncation_length = 4
+truncate_to_repo = true
+truncation_symbol = "…/"
+
+[character]
+# Using 'yellow' (warm gold) and 'red' (soft clay)
+success_symbol = "[❯](bold yellow)"
+error_symbol = "[❯](bold red)"
+
+# --- Version Control ---
+
+[git_branch]
+symbol = " "
+# 'magenta' in Ghostty is usually a very stylish muted plum/rose
+style = "bold magenta"
+
+[git_status]
+style = "bold red"
+format = '([\[$all_status$ahead_behind\]]($style) )'
+
+# --- Languages & Environments ---
+
+[nodejs]
+symbol = " "
+style = "bold green"
+format = "[$symbol($version)]($style) "
+
+[python]
+symbol = " "
+style = "bold yellow"
+# Brackets for venv are plain text to avoid clutter
+format = '[$symbol($version )(\($virtualenv\) )]($style)'
+
+[mise]
+disabled = false
+symbol = "󱗼 "
+style = "bold blue"
+format = "via [$symbol($version)]($style) "
+
+# --- Extras ---
+
+[cmd_duration]
+min_time = 1000
+# 'white' or 'black' (bright) usually maps to a soft grey in Ghostty
+style = "bold white"
+format = "took [$duration]($style)"
+
+[package]
+disabled = true
+
+[line_break]
+disabled = false

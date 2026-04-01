@@ -1,0 +1,9 @@
+[tools]
+python = "3.14"
+uv = "latest"
+"npm:pyright" = "latest"
+
+node = "24"
+bun = "latest"
+"npm:typescript" = "latest"
+"npm:typescript-language-server" = "latest"

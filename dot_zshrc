@@ -1,0 +1,92 @@
+# ==========================================
+# 1. ZSH Core: Completion, History & Keys
+# ==========================================
+# Initialize the completion system (MUST be done before zstyle)
+autoload -Uz compinit
+compinit
+
+# Case-insensitive autocompletion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+# History settings
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+setopt APPEND_HISTORY          # Append to history, don't overwrite
+setopt SHARE_HISTORY           # Share history across open terminal tabs instantly
+setopt HIST_IGNORE_ALL_DUPS    # Don't save duplicates
+
+# Fix Option+Left/Right word jumping on macOS
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
+
+# ==========================================
+# 2. Environment Variables
+# ==========================================
+export EDITOR=hx
+export GPG_TTY=$(tty)
+# Make fzf use 'fd' by default (respects .gitignore, ignores .git)
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# ==========================================
+# 3. Toolchain & Navigation Hooks
+# ==========================================
+eval "$(fzf --zsh)"
+eval "$(mise activate zsh)"
+eval "$(zoxide init zsh)"
+
+# ==========================================
+# 4. Custom Functions
+# ==========================================
+# Create a directory and immediately enter it
+function take() {
+  mkdir -p "$1"
+  cd "$1"
+}
+
+# Open man pages in macOS Preview
+function pman() {
+  man -t "${1}" | open -f -a Preview
+}
+
+# ==========================================
+# 5. Aliases
+# ==========================================
+# Modern Replacements (Old -> New)
+alias ls="eza --icons=always"
+alias ll="eza -la --icons=always --git"
+alias cat="bat --style=plain"
+alias grep="rg"
+alias ps="procs"
+alias top="btm"
+alias df="duf"
+alias du="dust"
+
+# Directory Navigation
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+# Quick List Commands (Upgraded to eza for visual consistency)
+alias l="eza -lh --icons=always"
+alias la="eza -al --icons=always"
+alias l.="eza -lhd --icons=always .[^.]*"
+
+# System & Utilities
+alias hide="setfile -a V"
+alias unhide="setfile -a v"
+alias undss="find . -name '.DS_Store' -exec rm -rf {} \;"
+
+# ==========================================
+# 6. ZSH Plugins (Must be sourced near the end)
+# ==========================================
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Syntax highlighting MUST be the absolute last plugin sourced
+#source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# ==========================================
+# 7. The Prompt (Must be the absolute last line)
+# ==========================================
+eval "$(starship init zsh)"
