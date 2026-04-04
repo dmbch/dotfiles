@@ -1,1 +1,10 @@
 README.md
+
+.claude/**
+!.claude/
+!.claude/CLAUDE.md
+!.claude/settings.json
+!.claude/agents/**
+!.claude/commands/**
+!.claude/rules/**
+!.claude/skills/**

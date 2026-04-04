@@ -3,37 +3,43 @@
     "DISABLE_AUTOUPDATER": "1"
   },
   "permissions": {
-    "allow": [
-      "Read(~/src/**)",
-      "Write(~/src/**)",
-      "Edit(~/src/**)",
-      "WebSearch",
-      "WebFetch"
+    "allow": ["Edit(~/src/**)", "Edit(~/.claude/**)", "WebSearch", "WebFetch"],
+    "ask": [
+      "Bash(docker *)",
+      "Bash(helm *)",
+      "Bash(kubectl *)",
+      "Bash(lazydocker *)",
+      "Bash(orb *)"
     ],
     "deny": [
       "Bash(curl * | *)",
       "Bash(wget *)",
       "Bash(git push -f *)",
       "Bash(git push --force *)",
-      "Read(~/**)",
-      "Write(~/**)",
-      "Edit(~/**)"
+      "Bash(brew install *)",
+      "Bash(mise install *)",
+      "Bash(mise use --global *)",
+      "Bash(mise use -g *)",
+      "Bash(uv tool install *)",
+      "Bash(uv pip install *)",
+      "Bash(bun install -g *)",
+      "Bash(bun install --global *)",
+      "Bash(npm install -g *)",
+      "Bash(npm install --global *)",
+      "Bash(pip install *)",
+      "Bash(pipx install *)",
+      "Read(~/.aws/**)",
+      "Read(~/.gnupg/**)",
+      "Read(~/.ssh/**)",
+      "Read(**/.env*)",
+      "Read(**/secrets/**)",
+      "Read(**/*.key)",
+      "Read(**/.zsh_history)",
+      "Read(**/.bash_history)",
+      "Read(~/.docker/**)"
     ]
   },
-  "hooks": {
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "git worktree prune 2>/dev/null; for wt in .claude/worktrees/*/; do [ -d \"$wt\" ] && git worktree list --porcelain | grep -q \"$(cd \"$wt\" && pwd)\" || rm -rf \"$wt\"; done 2>/dev/null; true",
-            "timeout": 10,
-            "statusMessage": "Cleaning up stale worktrees..."
-          }
-        ]
-      }
-    ]
-  },
+  "hooks": {},
   "enabledPlugins": {
     "code-review@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
@@ -44,15 +50,14 @@
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
-    "allowUnsandboxedCommands": false,
-    "network": {
-      "allowLocalBinding": true
-    },
+    "allowUnsandboxedCommands": true,
+    "excludedCommands": ["docker", "helm", "kubectl", "lazydocker", "orb"],
     "filesystem": {
-      "allowWrite": ["~/src"],
-      "denyWrite": ["~/"],
-      "denyRead": ["~/"],
-      "allowRead": ["~/src"]
+      "allowWrite": [".", "~/src", "~/.cache", "~/.claude"]
+    },
+    "network": {
+      "allowLocalBinding": true,
+      "allowedDomains": ["localhost", "127.0.0.1"]
     }
   }
 }
