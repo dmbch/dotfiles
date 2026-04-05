@@ -1,0 +1,26 @@
+services:
+  pgvector:
+    image: pgvector/pgvector:pg17
+    container_name: global-pgvector
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgvector_data:/var/lib/postgresql/data
+
+  valkey:
+    image: valkey/valkey:latest
+    container_name: global-valkey
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:6379:6379"
+    command: valkey-server --appendonly yes
+    volumes:
+      - valkey_data:/data
+
+volumes:
+  pgvector_data:
+  valkey_data:

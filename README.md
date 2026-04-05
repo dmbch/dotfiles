@@ -42,17 +42,18 @@ These require secrets or interactive auth that chezmoi can't manage.
    ```
    git config --global user.name $GIT_HANDLE
    git config --global user.email $GIT_EMAIL
-   git config --global user.signingkey $KEY_ID>
+   git config --global user.signingkey $KEY_ID
    git config --global commit.gpgsign true
    ```
 3. **GitHub CLI**: Log in and upload the GPG public key so commits show as verified.
    ```
    gh auth login
-   gpg --armor --export <KEY-ID> | gh gpg-key add
+   gpg --armor --export $KEY_ID | gh gpg-key add
    ```
 4. **Claude Code**: `claude` (follow the auth prompts)
 5. **Gemini CLI**: `gemini` (follow the auth prompts)
 6. **OrbStack**: `open -a OrbStack` (launch once to create `~/.orbstack/`)
+7. **Services**: `cd ~/.services && docker compose up -d`
 
 ## Security Model
 
