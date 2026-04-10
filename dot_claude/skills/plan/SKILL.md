@@ -94,6 +94,5 @@ Do NOT begin implementing. `/build` is a separate command.
 - The **Writes** list is the contract with `/build`. Accuracy matters more than brevity.
 - Use Glob and Grep to verify file paths and import chains. Don't guess.
 - Flag any chunk that feels too large — propose splitting it before the programmer asks.
-- Reference the project's architecture rules for layer placement decisions.
-- Follow the project's testing rules for test naming conventions.
+- Use LSP for type checking, diagnostics, and import tracing.
 - Between chunks: the programmer reviews, decides, commits, resets context.

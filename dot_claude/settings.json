@@ -3,7 +3,13 @@
     "DISABLE_AUTOUPDATER": "1"
   },
   "permissions": {
-    "allow": ["Edit(~/src/**)", "Edit(~/.claude/**)", "WebSearch", "WebFetch"],
+    "allow": [
+      "Bash(git *)",
+      "Edit(~/src/**)",
+      "Edit(~/.claude/**)",
+      "WebSearch",
+      "WebFetch"
+    ],
     "ask": [
       "Bash(docker *)",
       "Bash(helm *)",
@@ -51,7 +57,14 @@
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
     "allowUnsandboxedCommands": true,
-    "excludedCommands": ["docker", "helm", "kubectl", "lazydocker", "orb"],
+    "excludedCommands": [
+      "git",
+      "docker",
+      "helm",
+      "kubectl",
+      "lazydocker",
+      "orb"
+    ],
     "filesystem": {
       "allowWrite": [".", "~/src", "~/.cache", "~/.claude"]
     },

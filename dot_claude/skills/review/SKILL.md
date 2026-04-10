@@ -18,5 +18,5 @@ allowed-tools: Read, Glob, Grep, Bash, Agent, AskUserQuestion
 4. **Present findings** ranked: critical -> important -> minor. If the code is genuinely good, say so.
 
 5. **Landing.** After the programmer approves, land the changes:
-   - **Build branch** (`build/*`): rebase onto the working branch. The commit history tells the story — one commit per chunk. The programmer may reword, reorder, or squash interactively before the rebase. After rebase, delete the build branch.
+   - **Build branch** (`build/*`): rebase onto the branch the build branched from. The commit history tells the story — one commit per chunk. The programmer may reword, reorder, or squash interactively before the rebase. After rebase, delete the build branch.
    - **Direct changes** (no build branch): the programmer commits manually.

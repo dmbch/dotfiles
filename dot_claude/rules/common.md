@@ -25,6 +25,12 @@ Shared rules across all languages and projects.
 - **Minimize surface.** Every dependency is attack surface and maintenance burden. But the dependency you didn't adopt is worse than the abstraction you didn't need — wheel reinvention has compound maintenance cost.
 - Pin versions. Lock files are committed. Reproducible builds are non-negotiable.
 
+## Shell
+
+- **Run sandboxed by default.** Only request unsandboxed execution when the command genuinely cannot work inside the sandbox (e.g., needs GPG keys, container runtime). Test runners, linters, formatters, and build tools never need unsandboxed access.
+- **No shell redirects.** The Bash tool captures both stdout and stderr already. Never use `2>&1` or `>` — they trigger sandbox permission prompts and are buggy with pipes.
+- **No `cd <path> && <command>` compounds.** Use command-native path flags instead (e.g., `git -C <path>`). Compound commands with `cd` trigger permission prompts for bare repository attack prevention.
+
 ## Testing Philosophy
 
 - **Tests are product specification.** Each test name is a promise about what the system does. Read the test names as a feature list — is this the product we want to build?

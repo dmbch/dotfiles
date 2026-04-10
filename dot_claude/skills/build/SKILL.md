@@ -89,5 +89,5 @@ The parent presents results via `AskUserQuestion`. The programmer decides:
 - Only parallelize chunks with fully disjoint **Writes** lists. Trace imports — don't guess.
 - If a chunk feels too large, propose splitting it before writing anything.
 - Always present the execution plan via `AskUserQuestion` and wait for go-ahead.
-- Use Glob and Grep for code exploration. Use the project's type checker for import tracing.
-- Follow the project's language-specific rules for style and testing.
+- Use LSP for type checking, diagnostics, and import tracing.
+- Use `git -C <path>` instead of `cd <path> && git` for worktree operations.
