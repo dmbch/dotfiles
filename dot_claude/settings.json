@@ -19,6 +19,15 @@
       "Bash(orb *)"
     ],
     "deny": [
+      "Bash(osascript *)",
+      "Bash(defaults write *)",
+      "Bash(networksetup *)",
+      "Bash(dscl *)",
+      "Bash(diskutil *)",
+      "Bash(launchctl *)",
+      "Bash(security *)",
+      "Bash(pass *)",
+      "Bash(op *)",
       "Bash(curl * | *)",
       "Bash(wget *)",
       "Bash(git push -f *)",

@@ -30,6 +30,6 @@ brew "sd"                      # Replaces sed
 brew "starship"                # Terminal prompt
 brew "xh"                      # Replaces curl
 brew "zellij"                  # The modern tmux alternative
-brew "zoxide"                  # Replaces cd (you caught this!)
+brew "zoxide"                  # Replaces cd
 brew "zsh-autosuggestions"     # Self-explanatory
 brew "zsh-syntax-highlighting" # Ditto.

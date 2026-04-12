@@ -21,38 +21,7 @@ bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
 # ==========================================
-# 2. Environment Variables
-# ==========================================
-export EDITOR=hx
-export GPG_TTY=$(tty)
-
-# Make fzf use 'fd' by default (respects .gitignore, ignores .git)
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-# ==========================================
-# 3. Toolchain & Navigation Hooks
-# ==========================================
-eval "$(fzf --zsh)"
-eval "$(mise activate zsh)"
-eval "$(zoxide init zsh)"
-
-# ==========================================
-# 4. Custom Functions
-# ==========================================
-# Create a directory and immediately enter it
-function take() {
-  mkdir -p "$1"
-  cd "$1"
-}
-
-# Open man pages in macOS Preview
-function pman() {
-  man -t "${1}" | open -f -a Preview
-}
-
-# ==========================================
-# 5. Aliases
+# 2. Aliases
 # ==========================================
 # Modern Replacements (Old -> New)
 alias ls="eza --icons=always"
@@ -81,13 +50,56 @@ alias unhide="setfile -a v"
 alias undss="find . -name '.DS_Store' -exec rm -rf {} \;"
 
 # ==========================================
+# 3. Custom Functions
+# ==========================================
+# macOS Keychain helpers
+function secret-set() {
+  security add-generic-password -U -a "$USER" -s "$1" -w
+}
+
+function secret-get() {
+  security find-generic-password -a "$USER" -s "$1" -w 2>/dev/null \
+    || echo "missing secret: $1 (set with: secret-set $1)" >&2
+}
+
+# Create a directory and immediately enter it
+function take() {
+  mkdir -p "$1"
+  cd "$1"
+}
+
+# Open man pages in macOS Preview
+function pman() {
+  man -t "${1}" | open -f -a Preview
+}
+
+# ==========================================
+# 4. Environment Variables
+# ==========================================
+export EDITOR=vim
+export GPG_TTY=$(tty)
+
+export GEMINI_API_KEY=$(secret-get "GEMINI_API_KEY")
+
+# Make fzf use 'fd' by default (respects .gitignore, ignores .git)
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# ==========================================
+# 5. Toolchain & Navigation Hooks
+# ==========================================
+eval "$(fzf --zsh)"
+eval "$(mise activate zsh)"
+eval "$(zoxide init zsh)"
+
+# ==========================================
 # 6. ZSH Plugins (Must be sourced near the end)
 # ==========================================
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Syntax highlighting MUST be the absolute last plugin sourced
-#source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # ==========================================
-# 7. The Prompt (Must be the absolute last line)
+# 7. Prompt (Must be the absolute last line)
 # ==========================================
 eval "$(starship init zsh)"
