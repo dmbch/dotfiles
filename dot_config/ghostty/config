@@ -1,1 +1,3 @@
+cursor-style = bar
+cursor-style-blink = true
 font-size = 14
