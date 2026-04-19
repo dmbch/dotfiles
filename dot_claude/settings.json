@@ -50,6 +50,7 @@
       "Read(**/.env*)",
       "Read(**/secrets/**)",
       "Read(**/*.key)",
+      "Read(**/*.pem)",
       "Read(**/.zsh_history)",
       "Read(**/.bash_history)",
       "Read(~/.docker/**)"
@@ -83,5 +84,6 @@
     "typescript-lsp@claude-plugins-official": true,
     "security-guidance@claude-plugins-official": true
   },
+  "effortLevel": "high",
   "attribution": { "commit": "", "pr": "" }
 }
