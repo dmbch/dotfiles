@@ -50,7 +50,6 @@
       "Read(**/.env*)",
       "Read(**/secrets/**)",
       "Read(**/*.key)",
-      "Read(**/*.pem)",
       "Read(**/.zsh_history)",
       "Read(**/.bash_history)",
       "Read(~/.docker/**)"
