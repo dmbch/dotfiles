@@ -5,6 +5,7 @@
   },
   "permissions": {
     "allow": [
+      "Agent",
       "Bash(git *)",
       "Edit(~/src/**)",
       "Edit(~/.claude/**)",
@@ -59,14 +60,7 @@
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
     "allowUnsandboxedCommands": true,
-    "excludedCommands": [
-      "git",
-      "docker",
-      "helm",
-      "kubectl",
-      "lazydocker",
-      "orb"
-    ],
+    "excludedCommands": ["docker", "helm", "kubectl", "lazydocker", "orb"],
     "filesystem": {
       "allowWrite": [".", "~/src", "~/.cache", "~/.claude"]
     },
