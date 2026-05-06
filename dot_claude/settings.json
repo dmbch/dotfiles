@@ -60,7 +60,14 @@
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
     "allowUnsandboxedCommands": true,
-    "excludedCommands": ["docker", "helm", "kubectl", "lazydocker", "orb"],
+    "excludedCommands": [
+      "git",
+      "docker",
+      "helm",
+      "kubectl",
+      "lazydocker",
+      "orb"
+    ],
     "filesystem": {
       "allowWrite": [".", "~/src", "~/.cache", "~/.claude"]
     },
@@ -71,11 +78,8 @@
   },
   "hooks": {},
   "enabledPlugins": {
-    "code-review@claude-plugins-official": true,
-    "code-simplifier@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "security-guidance@claude-plugins-official": true
+    "typescript-lsp@claude-plugins-official": true
   },
   "effortLevel": "high",
   "attribution": { "commit": "", "pr": "" }
